@@ -9,6 +9,7 @@ Making a game that has enemies walk towards the center, and the player defeats t
 Animations for player and enemies - done
 Static background - done
 Moving enemies towards player - done
+Spawn enemies outside boundaries that move towards player
 Enemies explode and damage player on contact
 Player takes damage
 Words spawn above enemies head
