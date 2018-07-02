@@ -13,6 +13,10 @@ public class GameController : MonoBehaviour
     }
     void SpawnWaves()
     {
+        Instantiate(enemy, PositionOutsideCamera(), Quaternion.identity);
+    }
+    private Vector2 PositionOutsideCamera() {
+
         Vector2 dir = Random.insideUnitCircle;
         Vector2 position = Vector2.zero;
 
@@ -26,7 +30,6 @@ public class GameController : MonoBehaviour
             position = new Vector2(dir.x * Camera.main.orthographicSize * Camera.main.aspect,
                                     Mathf.Sign(dir.y) * Camera.main.orthographicSize + (Mathf.Sign(dir.y) * 1));
         }
-
-        Instantiate(enemy, position, Quaternion.identity);
+        return position;
     }
 }
