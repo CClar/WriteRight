@@ -21,9 +21,10 @@ GameObject:
   - component: {fileID: 4589652050925618}
   - component: {fileID: 212002573084525592}
   - component: {fileID: 95427963756621502}
-  - component: {fileID: 61704977883513920}
   - component: {fileID: 50874916774486438}
   - component: {fileID: 114631630349822578}
+  - component: {fileID: 114375926739863116}
+  - component: {fileID: 60845070523071134}
   m_Layer: 8
   m_Name: EnemyGhost1
   m_TagString: Enemy
@@ -64,8 +65,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61704977883513920
-BoxCollider2D:
+--- !u!60 &60845070523071134
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -73,9 +74,9 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 1
+  m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -86,9 +87,19 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.155, y: 0.085}
+      - {x: 0.044999998, y: 0.205}
+      - {x: -0.035, y: 0.205}
+      - {x: -0.13499999, y: 0.155}
+      - {x: -0.155, y: -0.015}
+      - {x: -0.155, y: -0.195}
+      - {x: -0.085, y: -0.295}
+      - {x: 0.005, y: -0.295}
+      - {x: 0.055, y: -0.275}
+      - {x: 0.085, y: -0.145}
+      - {x: 0.155, y: -0.114999995}
 --- !u!95 &95427963756621502
 Animator:
   serializedVersion: 3
@@ -107,6 +118,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114375926739863116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1547947495270862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088f8068cf148c141be01ca1dfa0afdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114631630349822578
 MonoBehaviour:
   m_ObjectHideFlags: 1

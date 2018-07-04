@@ -15,10 +15,13 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        transform.position =
-            Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y),
-            new Vector2(player.transform.position.x, player.transform.position.y),
-            speed * Time.deltaTime);
+        if (GameObject.Find("Player") != null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            transform.position =
+                Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y),
+                new Vector2(player.transform.position.x, player.transform.position.y),
+                speed * Time.deltaTime);
+        }
     }
 }
