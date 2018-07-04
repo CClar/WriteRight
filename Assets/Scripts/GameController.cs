@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public GameObject enemy;
-    public Vector2 spawnValues;
 
     private void Start()
     {

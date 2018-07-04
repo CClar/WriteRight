@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
     public int speed = 1;
-    // Use this for initialization
-    void Start()
-    {
+    public int attack = 1;
 
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (GameObject.Find("Player") != null)
