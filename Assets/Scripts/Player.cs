@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public int health = 2;
+    public GameObject explosion;
 
     public void TakeDamage(int attack)
     {
@@ -16,7 +17,8 @@ public class Player : MonoBehaviour
     }
     private void playerDeath()
     {
-        Destroy(this);
+        Destroy(gameObject);
+        Instantiate(explosion, transform.position, Quaternion.identity);
         // TODO: add gameover/restart
     }
 }

@@ -7,10 +7,31 @@ Making a game that has enemies walk towards the center, and the player defeats t
 
 # TODO
 Animations for player and enemies - done
+
 Static background - done
+
 Moving enemies towards player - done
-Spawn enemies outside boundaries that move towards player
-Enemies explode and damage player on contact
-Player takes damage
+
+Spawn enemies outside boundaries that move towards player - done
+
+Enemies explode and damage player on contact - done
+
+Player takes damage and dies - done
+
+Player and level info on screen
+
 Words spawn above enemies head
+
 Player can type the word on closest enemy to destroy enemy
+
+Setup spawn number based on level
+
+Level progression / Victory
+
+Level intro screen
+
+Death screen
+
+Victory screen
+
+Start game menu
