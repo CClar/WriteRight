@@ -7,15 +7,20 @@ public class Player : MonoBehaviour
     public int health = 2;
     public GameObject explosion;
 
+    private void Start()
+    {
+        
+    }
+
     public void TakeDamage(int attack)
     {
         health -= attack;
         if (health < 1)
         {
-            playerDeath();
+            PlayerDeath();
         }
     }
-    private void playerDeath()
+    private void PlayerDeath()
     {
         Destroy(gameObject);
         Instantiate(explosion, transform.position, Quaternion.identity);

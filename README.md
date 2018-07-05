@@ -24,6 +24,8 @@ Words spawn above enemies head
 
 Player can type the word on closest enemy to destroy enemy
 
+Words are pulled from an external file
+
 Setup spawn number based on level
 
 Level progression / Victory
