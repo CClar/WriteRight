@@ -18,11 +18,13 @@ Enemies explode and damage player on contact - done
 
 Player takes damage and dies - done
 
-Player and level info on screen
+Player and level info on screen - done
 
-Words spawn above enemies head
+Words spawn above enemies head - done
 
 Player can type the word on closest enemy to destroy enemy
+
+Words are random from an array
 
 Words are pulled from an external file
 
@@ -35,5 +37,9 @@ Level intro screen
 Death screen
 
 Victory screen
+
+Change spawns to only sppear near left and right side, not top and bottom (too close)
+
+Change sprite direction based on which side of screen it spawns on
 
 Start game menu
