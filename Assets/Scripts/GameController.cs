@@ -6,15 +6,43 @@ public class GameController : MonoBehaviour
 {
     public GameObject enemy;
 
-    private void Start()
+    private int currentLevel = 1;
+    private int maxLevel;
+    private List<Enemy> enemies;
+
+    private void Awake()
     {
         SpawnWaves();
     }
-    void SpawnWaves()
+    private void SpawnWaves()
     {
-        Instantiate(enemy, PositionOutsideCamera(), Quaternion.identity);
+        // Instantiates enemies based on level
+        int spawns = currentLevel * 3;
+        GameObject tempEnemy;
+        enemies = new List<Enemy>();
+        Enemy tempScript;
+
+        for (int i = 0; i < spawns; i++)
+        {
+            tempEnemy = Instantiate(enemy, PositionOutsideCamera(), Quaternion.identity);
+            tempScript = tempEnemy.GetComponent<Enemy>();
+            tempScript.SetWord("Example" + i);
+            enemies.Add(tempScript);
+        }
     }
-    private Vector2 PositionOutsideCamera() {
+    public void FindWord(string value)
+    {
+        foreach (Enemy e in enemies)
+        {
+            if (e.getWord() == value)
+            {
+                e.DestroyEnemy();
+                break;
+            }
+        }
+    }
+    private Vector2 PositionOutsideCamera()
+    {
 
         Vector2 dir = Random.insideUnitCircle;
         Vector2 position = Vector2.zero;
