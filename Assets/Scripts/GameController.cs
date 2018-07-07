@@ -34,7 +34,8 @@ public class GameController : MonoBehaviour
     {
         foreach (Enemy e in enemies)
         {
-            if (e.getWord() == value)
+            // check if the word and enemy object exists
+            if (string.Equals(e.getWord(), value, System.StringComparison.OrdinalIgnoreCase) && e)
             {
                 e.DestroyEnemy();
                 break;
