@@ -26,7 +26,7 @@ Setup spawn number based on level - done
 
 Player can type the word on closest enemy to destroy enemy - done
 
-Words are random from an array
+Words are random from an array - done
 
 Words are pulled from an external file
 

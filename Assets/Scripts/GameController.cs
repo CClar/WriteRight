@@ -10,15 +10,22 @@ public class GameController : MonoBehaviour
 
     private int currentLevel = 1;
     private int maxLevel;
-    private List<Enemy> enemies;
+    private List<Enemy> enemies = new List<Enemy>();
+    private Text pHolder;
+    private List<string> words;
 
     private void Awake()
     {
+        // Get pHolder text object
+        pHolder = input.placeholder.GetComponent<Text>();
+        // Gets list of words to use for the enemies
+        words = new List<string> { "Example1", "Example2", "Example3" };
+        // Spawn enemies for level
         SpawnWaves();
     }
     private void ClearPlaceholder()
     {
-        input.placeholder.GetComponent<Text>().text = "";
+        pHolder.text = "";
     }
     private void Update()
     {
@@ -27,24 +34,46 @@ public class GameController : MonoBehaviour
     }
     private void SpawnWaves()
     {
+        // Reset variables to refault
+        enemies.Clear();
+        pHolder.text = "Start Typing!";
         Invoke("ClearPlaceholder", 3);
+
+        // Instantiates enemies based on level
+        SpawnEnemy();
+    }
+    private void SpawnEnemy()
+    {
         // Instantiates enemies based on level
         int spawns = currentLevel * 3;
         GameObject tempEnemy;
-        enemies = new List<Enemy>();
         Enemy tempScript;
+        System.Random rnd = new System.Random();
 
         for (int i = 0; i < spawns; i++)
         {
+            // Spawns enemy outside camera
             tempEnemy = Instantiate(enemy, PositionOutsideCamera(), Quaternion.identity);
             tempScript = tempEnemy.GetComponent<Enemy>();
-            tempScript.SetWord("Example" + i);
+            // Sets word for enemy
+            ChooseWord(tempScript, rnd, spawns);
+            // Adds reference to enemy script to a list.
             enemies.Add(tempScript);
         }
     }
+    private void ChooseWord(Enemy tempScript, System.Random rnd, int spawns)
+    {
+        // Get a random index, and remove the word after setting the current enemy to that word
+        int rndIndex = rnd.Next(0, words.Count - 1);
+        tempScript.SetWord(words[rndIndex]);
+
+        // Remove word only if there are more or same amount of enemies as there are words in the list
+        if (words.Count <= spawns)
+            words.RemoveAt(rndIndex);
+    }
     public void ClearInputField(string value)
     {
-        input.text = " ";
+        input.text = "";
     }
     public void FindWord(string value)
     {
@@ -61,7 +90,7 @@ public class GameController : MonoBehaviour
     }
     private Vector2 PositionOutsideCamera()
     {
-
+        // Gets a Vector2 coordinate slightly outside the camera.
         Vector2 dir = Random.insideUnitCircle;
         Vector2 position = Vector2.zero;
 
