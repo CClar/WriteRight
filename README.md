@@ -24,7 +24,7 @@ Words spawn above enemies head - done
 
 Setup spawn number based on level - done
 
-Player can type the word on closest enemy to destroy enemy - 50% Need to make inputbox always active, and clear box after enter press or enemy death
+Player can type the word on closest enemy to destroy enemy - done
 
 Words are random from an array
 
