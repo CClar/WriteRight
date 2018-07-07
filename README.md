@@ -28,7 +28,7 @@ Player can type the word on closest enemy to destroy enemy - done
 
 Words are random from an array - done
 
-Words are pulled from an external file
+Words are pulled from an external file - done
 
 Level progression / Victory
 

@@ -19,7 +19,9 @@ public class GameController : MonoBehaviour
         // Get pHolder text object
         pHolder = input.placeholder.GetComponent<Text>();
         // Gets list of words to use for the enemies
-        words = new List<string> { "Example1", "Example2", "Example3" };
+        //words = new List<string> { "Example1", "Example2", "Example3" };
+        string[] fileWords = System.IO.File.ReadAllLines(System.IO.Directory.GetCurrentDirectory() + "/words.txt"); ;
+        words = new List<string>(fileWords);
         // Spawn enemies for level
         SpawnWaves();
     }
