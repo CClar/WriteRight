@@ -6,12 +6,13 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public int maxHealth = 10;
-    public int currentHealth = 2;
+    public int currentHealth;
     public GameObject explosion;
     public Text healthText;
 
     private void Start()
     {
+        currentHealth = maxHealth;
         healthText.text = currentHealth + "/" + maxHealth;
     }
 
