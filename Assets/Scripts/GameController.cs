@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
     public GameObject enemy;
+    public InputField input;
 
     private int currentLevel = 1;
     private int maxLevel;
@@ -13,6 +15,10 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         SpawnWaves();
+    }
+    private void Update()
+    {
+       input.ActivateInputField();
     }
     private void SpawnWaves()
     {
