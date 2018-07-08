@@ -91,6 +91,8 @@ public class GameController : MonoBehaviour
         GameObject tempEnemy;
         Enemy tempScript;
         System.Random rnd = new System.Random();
+        bool removeWord = words.Count >= spawns;  // Only remove words if there are enough words per enemy
+
         for (int i = 0; i < spawns; i++)
         {
             currentNumEnemies++;
@@ -98,20 +100,19 @@ public class GameController : MonoBehaviour
             tempEnemy = Instantiate(enemy, PositionOutsideCamera(), Quaternion.identity);
             tempScript = tempEnemy.GetComponent<Enemy>();
             // Sets word for enemy
-            ChooseWord(tempScript, rnd, spawns);
+            ChooseWord(tempScript, rnd, removeWord);
             // Adds reference to enemy script to a list.
             enemies.Add(tempScript);
         }
-        Debug.Log("Called");
     }
-    private void ChooseWord(Enemy tempScript, System.Random rnd, int spawns)
+    private void ChooseWord(Enemy tempScript, System.Random rnd, bool removeWord)
     {
         // Get a random index, and remove the word after setting the current enemy to that word
-        int rndIndex = rnd.Next(0, words.Count - 1);
+        int rndIndex = rnd.Next(0, words.Count);
         tempScript.SetWord(words[rndIndex]);
 
         // Remove word only if there are more or same amount of enemies as there are words in the list
-        if (words.Count <= spawns)
+        if (removeWord)
             words.RemoveAt(rndIndex);
     }
     public void FindWord(string value)
