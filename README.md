@@ -38,8 +38,13 @@ Death screen
 
 Victory screen
 
-Change spawns to only sppear near left and right side, not top and bottom (too close)
+Start game menu
 
 Change sprite direction based on which side of screen it spawns on
 
-Start game menu
+## Extra
+
+
+Check words to make sure they only have normal letters else skip
+
+Change spawns to only sppear near left and right side, not top and bottom (too close)

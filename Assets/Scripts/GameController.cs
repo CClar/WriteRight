@@ -7,38 +7,61 @@ public class GameController : MonoBehaviour
 {
     public GameObject enemy;
     public InputField input;
+    public GameObject levelTransition;
 
     private int currentLevel = 1;
-    private int maxLevel;
+    private int maxLevel = 3;
     private List<Enemy> enemies = new List<Enemy>();
     private Text pHolder;
     private List<string> words;
+    private int currentNumEnemies;
+    private bool levelStarted = false;
 
     private void Awake()
     {
         // Get pHolder text object
         pHolder = input.placeholder.GetComponent<Text>();
-        // Gets list of words to use for the enemies
-        string path = System.IO.Directory.GetCurrentDirectory() + "/words.txt";
-        if (!System.IO.File.Exists(path))
-            return;
-        string[] fileWords = System.IO.File.ReadAllLines(path);
-        words = new List<string>(fileWords);
-        // Spawn enemies for level
-        SpawnWaves();
-    }
-    private void ClearPlaceholder()
-    {
-        pHolder.text = "";
+        LevelTransition();
     }
     private void Update()
     {
         // Set inputbox active on every frame.
         input.ActivateInputField();
+
+        // Check if level end, start next level if true
+        if (currentNumEnemies < 1 && levelStarted) {
+            currentLevel++;
+            //TODO: Victory
+            if (currentLevel > maxLevel) return;
+            // Goto next level
+            else
+                LevelTransition();
+        }
+    }
+    private void StartLevel()
+    {
+        levelStarted = true;
+        levelTransition.SetActive(false);
+        words = new List<string>(GetWordList());
+        // Spawn enemies for level
+        SpawnWaves();
+    }
+    private string[] GetWordList() {
+        // Gets list of words to use for the enemies
+        string path = System.IO.Directory.GetCurrentDirectory() + "/words.txt";
+        if (!System.IO.File.Exists(path))
+            return new string[0];
+        return System.IO.File.ReadAllLines(path);
+    }
+    private void LevelTransition()
+    {
+        // Starts the next level
+        levelTransition.SetActive(true);
+        Invoke("StartLevel", 3);
     }
     private void SpawnWaves()
     {
-        // Reset variables to refault
+        // Reset variables to default
         enemies.Clear();
         pHolder.text = "Start Typing!";
         Invoke("ClearPlaceholder", 3);
@@ -48,6 +71,11 @@ public class GameController : MonoBehaviour
     }
     private void SpawnEnemy()
     {
+        // TOOO: Add error message
+        if (words.Count < 1) {
+            Debug.LogError("No Valid Words in List");
+            return;
+        }
         // Instantiates enemies based on level
         int spawns = currentLevel * 3;
         GameObject tempEnemy;
@@ -56,6 +84,7 @@ public class GameController : MonoBehaviour
 
         for (int i = 0; i < spawns; i++)
         {
+            currentNumEnemies++;
             // Spawns enemy outside camera
             tempEnemy = Instantiate(enemy, PositionOutsideCamera(), Quaternion.identity);
             tempScript = tempEnemy.GetComponent<Enemy>();
@@ -75,22 +104,20 @@ public class GameController : MonoBehaviour
         if (words.Count <= spawns)
             words.RemoveAt(rndIndex);
     }
-    public void ClearInputField(string value)
-    {
-        input.text = "";
-    }
     public void FindWord(string value)
     {
+        // check if the word and enemy object exists
         foreach (Enemy e in enemies)
-        {
-            // check if the word and enemy object exists
             if (string.Equals(e.getWord(), value.Trim(), System.StringComparison.OrdinalIgnoreCase) && e)
             {
                 e.DestroyEnemy();
                 input.text = "";
                 break;
             }
-        }
+    }
+    private void ClearPlaceholder()
+    {
+        pHolder.text = "";
     }
     private Vector2 PositionOutsideCamera()
     {
@@ -109,5 +136,8 @@ public class GameController : MonoBehaviour
                                     Mathf.Sign(dir.y) * Camera.main.orthographicSize + (Mathf.Sign(dir.y) * 1));
         }
         return position;
+    }
+    public void DecreaseEnemyCount() {
+        currentNumEnemies--;
     }
 }

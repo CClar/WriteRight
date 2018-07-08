@@ -10,8 +10,13 @@ public class Enemy : MonoBehaviour
     public Text textWord;
     public GameObject explosion;
 
+    private GameController gameController;
     private string currentWord;
 
+    private void Awake()
+    {
+        gameController = GameObject.Find("GameController").GetComponent< GameController>();
+    }
     private void Update()
     {
         // Find and move towards Player gameObject.
@@ -23,14 +28,15 @@ public class Enemy : MonoBehaviour
                 speed * Time.deltaTime);
         }
     }
-    public string getWord() {
+    public string getWord()
+    {
         return currentWord;
     }
     public void SetWord(string w)
     {
         if (w != null)
             currentWord = w;
-            textWord.text = w;
+        textWord.text = w;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -48,9 +54,11 @@ public class Enemy : MonoBehaviour
         // Spawn explosion and remove current enemy
         DestroyEnemy();
     }
-    public void DestroyEnemy() {
+    public void DestroyEnemy()
+    {
         // Spawn explosion and remove current enemy
         Instantiate(explosion, transform.position, Quaternion.identity);
+        gameController.DecreaseEnemyCount();
         Destroy(gameObject);
     }
 }
