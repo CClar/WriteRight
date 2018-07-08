@@ -7,20 +7,24 @@ public class GameController : MonoBehaviour
 {
     public GameObject enemy;
     public InputField input;
+    public Text transitionText;
     public GameObject levelTransition;
+
 
     private int currentLevel = 1;
     private int maxLevel = 3;
     private List<Enemy> enemies = new List<Enemy>();
     private Text pHolder;
-    private List<string> words;
+    private List<string> words = new List<string>();
     private int currentNumEnemies;
     private bool levelStarted = false;
 
     private void Awake()
     {
-        // Get pHolder text object
+        // Initialize Components
         pHolder = input.placeholder.GetComponent<Text>();
+
+        // Start Game
         LevelTransition();
     }
     private void Update()
@@ -29,8 +33,10 @@ public class GameController : MonoBehaviour
         input.ActivateInputField();
 
         // Check if level end, start next level if true
-        if (currentNumEnemies < 1 && levelStarted) {
-            currentLevel++;
+        if (currentNumEnemies < 1 && levelStarted)
+        {
+            levelStarted = false;
+            ++currentLevel;
             //TODO: Victory
             if (currentLevel > maxLevel) return;
             // Goto next level
@@ -46,7 +52,8 @@ public class GameController : MonoBehaviour
         // Spawn enemies for level
         SpawnWaves();
     }
-    private string[] GetWordList() {
+    private string[] GetWordList()
+    {
         // Gets list of words to use for the enemies
         string path = System.IO.Directory.GetCurrentDirectory() + "/words.txt";
         if (!System.IO.File.Exists(path))
@@ -56,6 +63,7 @@ public class GameController : MonoBehaviour
     private void LevelTransition()
     {
         // Starts the next level
+        transitionText.text = "Level " + currentLevel;
         levelTransition.SetActive(true);
         Invoke("StartLevel", 3);
     }
@@ -72,16 +80,17 @@ public class GameController : MonoBehaviour
     private void SpawnEnemy()
     {
         // TOOO: Add error message
-        if (words.Count < 1) {
+        if (words.Count < 1)
+        {
             Debug.LogError("No Valid Words in List");
             return;
         }
         // Instantiates enemies based on level
         int spawns = currentLevel * 3;
+        currentNumEnemies = 0;
         GameObject tempEnemy;
         Enemy tempScript;
         System.Random rnd = new System.Random();
-
         for (int i = 0; i < spawns; i++)
         {
             currentNumEnemies++;
@@ -93,6 +102,7 @@ public class GameController : MonoBehaviour
             // Adds reference to enemy script to a list.
             enemies.Add(tempScript);
         }
+        Debug.Log("Called");
     }
     private void ChooseWord(Enemy tempScript, System.Random rnd, int spawns)
     {
@@ -137,7 +147,8 @@ public class GameController : MonoBehaviour
         }
         return position;
     }
-    public void DecreaseEnemyCount() {
+    public void DecreaseEnemyCount()
+    {
         currentNumEnemies--;
     }
 }
