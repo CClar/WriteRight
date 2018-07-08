@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public int maxHealth = 10;
-    public int currentHealth;
+    private int currentHealth;
     public GameObject explosion;
     public Text healthText;
 
@@ -25,8 +25,8 @@ public class Player : MonoBehaviour
     }
     private void PlayerDeath()
     {
+        GameObject.Find("GameController").GetComponent<GameController>().Defeat();
         Destroy(gameObject);
         Instantiate(explosion, transform.position, Quaternion.identity);
-        // TODO: add gameover/restart
     }
 }

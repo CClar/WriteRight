@@ -30,21 +30,24 @@ Words are random from an array - done
 
 Words are pulled from an external file - done
 
-Level progression / Victory
+Level progression / Victory - done
 
-Level intro screen
+Level intro screen - Done
 
-Death screen
+Death screen - Done
 
-Victory screen
+Victory screen - Done
 
 Start game menu
 
 Change sprite direction based on which side of screen it spawns on
 
+Add spawn delay, time inbetween each spawn
+
 ## Extra
 
-
-Check words to make sure they only have normal letters else skip
+Check words to make sure they only have normal letters else skip, ignore lines that start with //
 
 Change spawns to only sppear near left and right side, not top and bottom (too close)
+
+When enemies share word, destroy the closest

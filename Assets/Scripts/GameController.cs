@@ -8,13 +8,13 @@ public class GameController : MonoBehaviour
     public GameObject enemy;
     public InputField input;
     public Text transitionText;
+    public Text levelText;
     public GameObject levelTransition;
 
-
     private int currentLevel = 1;
-    private int maxLevel = 3;
-    private List<Enemy> enemies = new List<Enemy>();
+    private int maxLevel = 10;
     private Text pHolder;
+    private List<Enemy> enemies = new List<Enemy>();
     private List<string> words = new List<string>();
     private int currentNumEnemies;
     private bool levelStarted = false;
@@ -37,11 +37,12 @@ public class GameController : MonoBehaviour
         {
             levelStarted = false;
             ++currentLevel;
-            //TODO: Victory
-            if (currentLevel > maxLevel) return;
+            // Victory
+            if (currentLevel > maxLevel)
+                Invoke("Victory", 1);
             // Goto next level
             else
-                LevelTransition();
+                Invoke("LevelTransition", 1);
         }
     }
     private void StartLevel()
@@ -64,8 +65,21 @@ public class GameController : MonoBehaviour
     {
         // Starts the next level
         transitionText.text = "Level " + currentLevel;
+        levelText.text = "Level " + currentLevel;
         levelTransition.SetActive(true);
         Invoke("StartLevel", 3);
+    }
+    private void Victory()
+    {
+        levelStarted = false;
+        transitionText.text = "Victory!";
+        levelTransition.SetActive(true);
+    }
+    public void Defeat()
+    {
+        levelStarted = false;
+        transitionText.text = "You have been Defeated.";
+        levelTransition.SetActive(true);
     }
     private void SpawnWaves()
     {
@@ -86,7 +100,7 @@ public class GameController : MonoBehaviour
             return;
         }
         // Instantiates enemies based on level
-        int spawns = currentLevel * 3;
+        int spawns = currentLevel * 2;
         currentNumEnemies = 0;
         GameObject tempEnemy;
         Enemy tempScript;
