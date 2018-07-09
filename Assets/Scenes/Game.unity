@@ -291,6 +291,7 @@ MonoBehaviour:
   enemy: {fileID: 1753986152230140, guid: 4fc41f715851fd845a5a9144179d2a86, type: 2}
   input: {fileID: 1720934851}
   transitionText: {fileID: 193079510}
+  levelText: {fileID: 206110543}
   levelTransition: {fileID: 2125008713}
 --- !u!4 &280645838
 Transform:
@@ -790,8 +791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0293039760f8e2845ba8d0f3593f569b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  currentHealth: 2
+  maxHealth: 1
   explosion: {fileID: 1333855455668278, guid: fe8417adc53f1414a8195d6dae8b213b, type: 2}
   healthText: {fileID: 868090525}
 --- !u!61 &1468365912

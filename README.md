@@ -32,11 +32,11 @@ Words are pulled from an external file - done
 
 Level progression / Victory - done
 
-Level intro screen - Done
+Level intro screen - done
 
-Death screen - Done
+Death screen - done
 
-Victory screen - Done
+Victory screen - done
 
 Start game menu
 
@@ -48,6 +48,10 @@ Add spawn delay, time inbetween each spawn
 
 Check words to make sure they only have normal letters else skip, ignore lines that start with //
 
+Pull words from another source (dictionary, etc)
+
 Change spawns to only sppear near left and right side, not top and bottom (too close)
+
+Create different enemy types, spawn based on level
 
 When enemies share word, destroy the closest

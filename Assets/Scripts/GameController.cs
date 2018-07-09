@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     private List<string> words = new List<string>();
     private int currentNumEnemies;
     private bool levelStarted = false;
+    public GameObject playerInput;
 
     private void Awake()
     {
@@ -48,6 +49,7 @@ public class GameController : MonoBehaviour
     private void StartLevel()
     {
         levelStarted = true;
+        playerInput.SetActive(true);
         levelTransition.SetActive(false);
         words = new List<string>(GetWordList());
         // Spawn enemies for level
@@ -67,6 +69,7 @@ public class GameController : MonoBehaviour
         transitionText.text = "Level " + currentLevel;
         levelText.text = "Level " + currentLevel;
         levelTransition.SetActive(true);
+        playerInput.SetActive(false);
         Invoke("StartLevel", 3);
     }
     private void Victory()
@@ -136,13 +139,16 @@ public class GameController : MonoBehaviour
             if (string.Equals(e.getWord(), value.Trim(), System.StringComparison.OrdinalIgnoreCase) && e)
             {
                 e.DestroyEnemy();
-                input.text = "";
+                ClearInputField();
                 break;
             }
     }
     private void ClearPlaceholder()
     {
         pHolder.text = "";
+    }
+    public void ClearInputField() {
+        input.text = "";
     }
     private Vector2 PositionOutsideCamera()
     {
