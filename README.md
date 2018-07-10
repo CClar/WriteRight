@@ -38,15 +38,21 @@ Death screen - done
 
 Victory screen - done
 
-Start game menu
+Start game menu - done
 
-Change sprite direction based on which side of screen it spawns on
+Change sprite direction based on which side of screen it spawns on - done
 
 Add spawn delay, time inbetween each spawn
+
+Add a button to return to menu after defeat or victory.
+
+Add a way to quit game or return to menu during levels.
 
 ## Extra
 
 Check words to make sure they only have normal letters else skip, ignore lines that start with //
+
+Return to menu with error message if no words are valid
 
 Pull words from another source (dictionary, etc)
 

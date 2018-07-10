@@ -107,6 +107,7 @@ public class GameController : MonoBehaviour
         currentNumEnemies = 0;
         GameObject tempEnemy;
         Enemy tempScript;
+        Vector2 tempPosition;
         System.Random rnd = new System.Random();
         bool removeWord = words.Count >= spawns;  // Only remove words if there are enough words per enemy
 
@@ -114,10 +115,15 @@ public class GameController : MonoBehaviour
         {
             currentNumEnemies++;
             // Spawns enemy outside camera
-            tempEnemy = Instantiate(enemy, PositionOutsideCamera(), Quaternion.identity);
+            tempPosition = PositionOutsideCamera();
+            tempEnemy = Instantiate(enemy, tempPosition, Quaternion.identity);
             tempScript = tempEnemy.GetComponent<Enemy>();
             // Sets word for enemy
             ChooseWord(tempScript, rnd, removeWord);
+            // Flips sprite if on right side of player
+            // 0 since player spawns in middle
+            if (tempPosition.x > 0)
+                tempEnemy.GetComponent<SpriteRenderer>().flipX = true;
             // Adds reference to enemy script to a list.
             enemies.Add(tempScript);
         }
