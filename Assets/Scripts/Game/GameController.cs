@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public Text transitionText;
     public Text levelText;
     public GameObject levelTransition;
+    public GameObject retunToMenu;
 
     private int currentLevel = 1;
     private int maxLevel = 10;
@@ -80,12 +81,14 @@ public class GameController : MonoBehaviour
         levelStarted = false;
         transitionText.text = "Victory!";
         levelTransition.SetActive(true);
+        retunToMenu.SetActive(true);
     }
     public void Defeat()
     {
         levelStarted = false;
         transitionText.text = "You have been Defeated.";
         levelTransition.SetActive(true);
+        retunToMenu.SetActive(true);
     }
     private void SpawnWaves()
     {
