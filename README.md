@@ -42,7 +42,7 @@ Start game menu - done
 
 Change sprite direction based on which side of screen it spawns on - done
 
-Add spawn delay, time inbetween each spawn
+Add spawn delay, time inbetween each spawn - done
 
 Add a button to return to menu after defeat or victory.
 
@@ -54,7 +54,7 @@ Check words to make sure they only have normal letters else skip, ignore lines t
 
 Return to menu with error message if no words are valid
 
-Pull words from another source (dictionary, etc)
+Pull words from another path (dictionary, etc) entered by the user has to end with .txt, if none then default to local txt
 
 Change spawns to only sppear near left and right side, not top and bottom (too close)
 

@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
 
     private int currentLevel = 1;
     private int maxLevel = 10;
+    private int timeBetweenSpawns;
     private Text pHolder;
     private List<Enemy> enemies = new List<Enemy>();
     private List<string> words = new List<string>();
@@ -52,6 +53,8 @@ public class GameController : MonoBehaviour
         playerInput.SetActive(true);
         levelTransition.SetActive(false);
         words = new List<string>(GetWordList());
+        // Set spawn rate
+        timeBetweenSpawns = 1;
         // Spawn enemies for level
         SpawnWaves();
     }
@@ -92,19 +95,19 @@ public class GameController : MonoBehaviour
         Invoke("ClearPlaceholder", 3);
 
         // Instantiates enemies based on level
-        SpawnEnemy();
+        StartCoroutine(SpawnEnemies());
     }
-    private void SpawnEnemy()
+    IEnumerator SpawnEnemies()
     {
         // TOOO: Add error message
         if (words.Count < 1)
         {
             Debug.LogError("No Valid Words in List");
-            return;
+            yield return null;
         }
         // Instantiates enemies based on level
         int spawns = currentLevel * 2;
-        currentNumEnemies = 0;
+        currentNumEnemies = spawns;
         GameObject tempEnemy;
         Enemy tempScript;
         Vector2 tempPosition;
@@ -113,7 +116,9 @@ public class GameController : MonoBehaviour
 
         for (int i = 0; i < spawns; i++)
         {
-            currentNumEnemies++;
+            // Wait between spawns, skip first spawn
+            if (i != 0)
+                yield return new WaitForSeconds(timeBetweenSpawns);
             // Spawns enemy outside camera
             tempPosition = PositionOutsideCamera();
             tempEnemy = Instantiate(enemy, tempPosition, Quaternion.identity);
@@ -149,11 +154,13 @@ public class GameController : MonoBehaviour
                 break;
             }
     }
+
     private void ClearPlaceholder()
     {
         pHolder.text = "";
     }
-    public void ClearInputField() {
+    public void ClearInputField()
+    {
         input.text = "";
     }
     private Vector2 PositionOutsideCamera()
