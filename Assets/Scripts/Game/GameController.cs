@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
     public GameObject levelMenu;
 
     private int currentLevel = 1;
-    private int maxLevel = 10;
+    private int maxLevel = 5;
     private float timeBetweenSpawns;
     private Text pHolder;
     private List<Enemy> enemies = new List<Enemy>();
@@ -205,11 +205,13 @@ public class GameController : MonoBehaviour
     }
     public void LevelMenu()
     {
+        // Pause game and bring up menu
         player.SetActive(false);
         levelMenu.SetActive(true);
     }
     public void ResumeGame()
     {
+        // Unpause game and close menu
         player.SetActive(true);
         levelMenu.SetActive(false);
     }
