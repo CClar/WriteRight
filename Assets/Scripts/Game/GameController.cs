@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
@@ -14,7 +15,7 @@ public class GameController : MonoBehaviour
 
     private int currentLevel = 1;
     private int maxLevel = 10;
-    private int timeBetweenSpawns;
+    private float timeBetweenSpawns;
     private Text pHolder;
     private List<Enemy> enemies = new List<Enemy>();
     private List<string> words = new List<string>();
@@ -55,7 +56,7 @@ public class GameController : MonoBehaviour
         levelTransition.SetActive(false);
         words = new List<string>(GetWordList());
         // Set spawn rate
-        timeBetweenSpawns = 1;
+        timeBetweenSpawns = 0.75f;
         // Spawn enemies for level
         SpawnWaves();
     }
@@ -187,5 +188,8 @@ public class GameController : MonoBehaviour
     public void DecreaseEnemyCount()
     {
         currentNumEnemies--;
+    }
+    public void ReturnToMenu() {
+        SceneManager.LoadScene("Menu");
     }
 }
