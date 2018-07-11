@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public Text levelText;
     public GameObject levelTransition;
     public GameObject retunToMenu;
+    public GameObject levelMenu;
 
     private int currentLevel = 1;
     private int maxLevel = 10;
@@ -22,11 +23,15 @@ public class GameController : MonoBehaviour
     private int currentNumEnemies;
     private bool levelStarted = false;
     public GameObject playerInput;
+    private GameObject player;
+    private GameObject menuButton;
 
     private void Awake()
     {
         // Initialize Components
         pHolder = input.placeholder.GetComponent<Text>();
+        player = GameObject.Find("Player");
+        menuButton = GameObject.Find("MenuButton");
 
         // Start Game
         LevelTransition();
@@ -54,6 +59,7 @@ public class GameController : MonoBehaviour
         levelStarted = true;
         playerInput.SetActive(true);
         levelTransition.SetActive(false);
+        menuButton.SetActive(true);
         words = new List<string>(GetWordList());
         // Set spawn rate
         timeBetweenSpawns = 0.75f;
@@ -75,6 +81,7 @@ public class GameController : MonoBehaviour
         levelText.text = "Level " + currentLevel;
         levelTransition.SetActive(true);
         playerInput.SetActive(false);
+        menuButton.SetActive(false);
         Invoke("StartLevel", 3);
     }
     private void Victory()
@@ -120,6 +127,9 @@ public class GameController : MonoBehaviour
 
         for (int i = 0; i < spawns; i++)
         {
+            // Don't spawn while player is inactive
+            while (!player.activeSelf)
+                yield return new WaitForSeconds(1);
             // Wait between spawns, skip first spawn
             if (i != 0)
                 yield return new WaitForSeconds(timeBetweenSpawns);
@@ -189,7 +199,18 @@ public class GameController : MonoBehaviour
     {
         currentNumEnemies--;
     }
-    public void ReturnToMenu() {
+    public void ReturnToMenu()
+    {
         SceneManager.LoadScene("Menu");
+    }
+    public void LevelMenu()
+    {
+        player.SetActive(false);
+        levelMenu.SetActive(true);
+    }
+    public void ResumeGame()
+    {
+        player.SetActive(true);
+        levelMenu.SetActive(false);
     }
 }

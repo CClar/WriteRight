@@ -44,9 +44,9 @@ Change sprite direction based on which side of screen it spawns on - done
 
 Add spawn delay, time inbetween each spawn - done
 
-Add a button to return to menu after defeat or victory.
+Add a button to return to menu after defeat or victory. - done
 
-Add a way to quit game or return to menu during levels.
+Add a way to quit game or return to menu during levels. - done
 
 ## Extra
 
